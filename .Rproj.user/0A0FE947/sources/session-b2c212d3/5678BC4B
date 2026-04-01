@@ -1,0 +1,26 @@
+{
+    "id": "5678BC4B",
+    "path": "~/Documents/Rdevelopment/DemoCohortDiagnosticsStudy/inst/settings/insertCohortDefinition.R",
+    "project_path": "inst/settings/insertCohortDefinition.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1774968791605.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "2,16",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1775021671,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1775021671384,
+    "read_only": false,
+    "read_only_alternatives": []
+}
