@@ -161,7 +161,7 @@ execute <- function(connectionDetails,
     useConditionEraGroupStart = FALSE, # do not use because https://github.com/OHDSI/FeatureExtraction/issues/144
     useConditionEraGroupOverlap = TRUE,
     useDrugExposure = FALSE, # leads to too many concept id
-    useDrugEraOverlap = FALSE,
+    useDrugEraOverlap = TRUE,
     useDrugEraGroupStart = FALSE, # do not use because https://github.com/OHDSI/FeatureExtraction/issues/144
     useDrugEraGroupOverlap = TRUE,
     useObservation = TRUE,

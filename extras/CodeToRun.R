@@ -5,8 +5,8 @@ library(dplyr)
 maxCores <- parallel::detectCores()
 
 # The folder where the study intermediate and result files will be written:
-homedir = "/home/jovyan/work"
-outputFolder <- file.path(homedir, "output/DemoCohortDiagnosticsStudy_synthea")
+homedir = "/Users/andreikiselev/Documents/Rdevelopment"
+outputFolder <- file.path(homedir, "StudyResults/DemoCohortDiagnosticsStudy_lungcancer_synthea10k")
 
 # Optional: specify where the temporary files (used by the Andromeda package) will be created:
 options(andromedaTempFolder = file.path(outputFolder, "andromedaTemp"))
@@ -18,35 +18,35 @@ DBMS = "postgresql"
 #user name
 source(file.path(homedir, "credentials.R"))
 
-#USER = db_user
+USER = db_user_BDM
 #password
-#PASSWORD= db_pass
+PASSWORD= db_pass_BDM
 #server
-SERVER = "localhost/postgres"
+SERVER = "51.15.207.59/rdb"
 #port
-DB_PORT = 5432
+DB_PORT = 3522
 # path to local JDBC driver
 pathToDriver=Sys.getenv("DATABASECONNECTOR_JAR_FOLDER")
 
 connectionDetails <- DatabaseConnector::createConnectionDetails(dbms = DBMS,
-                                                                user = db_user,
-                                                                password = db_pass,
+                                                                user = USER,
+                                                                password = PASSWORD,
                                                                 server = SERVER,
-                                                                port = 5432,
-                                                                pathToDriver = DB_PORT)
+                                                                port = DB_PORT,
+                                                                pathToDriver = pathToDriver)
 # The name of the database schema where the CDM data can be found:
 
-cdmDatabaseSchema <- "cdm_synthea30k"
+cdmDatabaseSchema <- "lungcancer_synth10k"
 
 # The name of the database schema and table where the study-specific cohorts will be instantiated:
-cohortDatabaseSchema <- "cdm_synthea30k_results"
-cohortTable <- "cohort_demoAK"
+cohortDatabaseSchema <- "lungcancer_synth10k_results"
+cohortTable <- "cohort"
 
 # Some meta-information that will be used by the export function:
-databaseId <- "synthea30k"
-databaseName <- "synthea30k default database"
+databaseId <- "lungcancer_synth10k"
+databaseName <- "lungcancer_synth10k"
 databaseDescription <-
-  "synthea30k default database"
+  "lungcancer_synth10k"
 
 # For some database platforms (e.g. Oracle): define a schema that can be used to emulate temp tables:
 options(sqlRenderTempEmulationSchema = NULL)
@@ -65,9 +65,10 @@ DemoCohortDiagnosticsStudy::execute(
 
 
 # if you want to view the shiny app locally, uncomment the following section
-# CohortDiagnostics::createMergedResultsFile(
-#  dataFolder = outputFolder,
-#  sqliteDbPath = file.path(outputFolder,
-#                           "MergedCohortDiagnosticsData.sqlite")
-#)
-#CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = outputFolder)
+CohortDiagnostics::createMergedResultsFile(
+  dataFolder = outputFolder,
+  sqliteDbPath = file.path(outputFolder,
+                           "MergedCohortDiagnosticsData.sqlite")
+)
+CohortDiagnostics::launchDiagnosticsExplorer(sqliteDbPath = file.path(outputFolder,
+                                                                      "MergedCohortDiagnosticsData.sqlite"))

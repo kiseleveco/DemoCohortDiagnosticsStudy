@@ -1,2 +1,4 @@
-﻿cohort_name,cohortId,atlasId
-[DEMO] PCA,1680,1680
+atlas_id,cohort_id,cohort_name,logic_description,generate_stats
+246,1,Amlodipine,NA,TRUE
+247,2,Lisinopril,NA,TRUE
+248,3,MACE (major cardiac events),NA,TRUE

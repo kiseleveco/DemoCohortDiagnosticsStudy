@@ -20,5 +20,6 @@ Imports: ROhdsiWebApi,
         FeatureExtraction,
         CohortDiagnostics,
         Eunomia,
-        dplyr
+        dplyr,
+        OhdsiShinyModules
 RoxygenNote: 7.3.3
