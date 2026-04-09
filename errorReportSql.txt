@@ -2,16 +2,17 @@ DBMS:
 postgresql
 
 Error:
-org.postgresql.util.PSQLException: ERROR: schema "lungcancer_synth10k_results" does not exist
-  Position: 14
+org.postgresql.util.PSQLException: An I/O error occurred while sending to the backend.
 
 SQL:
-CREATE TABLE lungcancer_synth10k_results.cohort (
-  	cohort_definition_id BIGINT,
-  	subject_id BIGINT,
-  	cohort_start_date DATE,
-  	cohort_end_date DATE
-  )
+INSERT INTO charlson_concepts (
+	diag_category_id,
+	concept_id
+	)
+SELECT 8,
+	descendant_concept_id
+FROM lungcancer_synth10k.concept_ancestor
+WHERE ancestor_concept_id IN (4247120)
 
 R version:
 R version 4.4.1 (2024-06-14)
@@ -29,5 +30,4 @@ Attached base packages:
 - base
 
 Other attached packages:
-- dplyr (1.2.0)
 - DemoCohortDiagnosticsStudy (0.1.0)

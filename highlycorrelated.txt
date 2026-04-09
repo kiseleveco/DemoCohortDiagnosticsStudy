@@ -1,0 +1,18 @@
+High correlation between covariate(s) and treatment detected:
+covariateId	correlation	covariateName	analysisId	conceptId	valueAsConceptId	collisions
+316866210	0.569053983654394	condition_era group (ConditionGroupEraLongTerm) during day -365 through 0 days relative to index: Hypertensive disorder	210	316866	NA	NA
+316866212	0.56382221020874	condition_era group (ConditionGroupEraShortTerm) during day -30 through 0 days relative to index: Hypertensive disorder	212	316866	NA	NA
+320128210	0.569053983654394	condition_era group (ConditionGroupEraLongTerm) during day -365 through 0 days relative to index: Essential hypertension	210	320128	NA	NA
+320128212	0.56382221020874	condition_era group (ConditionGroupEraShortTerm) during day -30 through 0 days relative to index: Essential hypertension	212	320128	NA	NA
+1308216410	-1	drug_era group (DrugGroupEraLongTerm) during day -365 through 0 days relative to index: lisinopril	410	1308216	NA	NA
+1308216412	-1	drug_era group (DrugGroupEraShortTerm) during day -30 through 0 days relative to index: lisinopril	412	1308216	NA	NA
+1308216413	-1	drug_era group (DrugGroupEraOverlapping) during day 0 through 0 days relative to index: lisinopril	413	1308216	NA	NA
+21601782410	-0.990847231456138	drug_era group (DrugGroupEraLongTerm) during day -365 through 0 days relative to index: AGENTS ACTING ON THE RENIN-ANGIOTENSIN SYSTEM	410	21601782	NA	NA
+21601782412	-0.990847231456138	drug_era group (DrugGroupEraShortTerm) during day -30 through 0 days relative to index: AGENTS ACTING ON THE RENIN-ANGIOTENSIN SYSTEM	412	21601782	NA	NA
+21601782413	-0.990847231456138	drug_era group (DrugGroupEraOverlapping) during day 0 through 0 days relative to index: AGENTS ACTING ON THE RENIN-ANGIOTENSIN SYSTEM	413	21601782	NA	NA
+21601783410	-1	drug_era group (DrugGroupEraLongTerm) during day -365 through 0 days relative to index: ACE INHIBITORS, PLAIN	410	21601783	NA	NA
+21601783412	-1	drug_era group (DrugGroupEraShortTerm) during day -30 through 0 days relative to index: ACE INHIBITORS, PLAIN	412	21601783	NA	NA
+21601783413	-1	drug_era group (DrugGroupEraOverlapping) during day 0 through 0 days relative to index: ACE INHIBITORS, PLAIN	413	21601783	NA	NA
+21601784410	-1	drug_era group (DrugGroupEraLongTerm) during day -365 through 0 days relative to index: ACE inhibitors, plain	410	21601784	NA	NA
+21601784412	-1	drug_era group (DrugGroupEraShortTerm) during day -30 through 0 days relative to index: ACE inhibitors, plain	412	21601784	NA	NA
+21601784413	-1	drug_era group (DrugGroupEraOverlapping) during day 0 through 0 days relative to index: ACE inhibitors, plain	413	21601784	NA	NA

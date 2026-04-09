@@ -72,3 +72,32 @@ CohortDiagnostics::createMergedResultsFile(
 )
 CohortDiagnostics::launchDiagnosticsExplorer(sqliteDbPath = file.path(outputFolder,
                                                                       "MergedCohortDiagnosticsData.sqlite"))
+
+
+
+#######CohortMethod
+#If negatie control cohort is not generated before
+negative_cohort_generate(connectionDetails,
+                         cohortDatabaseSchema,
+                         cohortTable)
+
+
+
+
+####CohortMethods part
+results <- execute_CohortMethods(connectionDetails = connectionDetails,
+                      cdmDatabaseSchema = cdmDatabaseSchema,
+                      cohortDatabaseSchema = cohortDatabaseSchema,
+                      cohortTable = "cohort",
+                      outputFolder = outputFolder,
+                      incrementalFolder = file.path(outputFolder, "incrementalFolder"),
+                      minCellCount = 5,
+                      databaseName = databaseId,
+                      databaseDescription = databaseId,
+                      extraLog = NULL,
+                      targetId = 1,
+                      comparatorId = 2,
+                      outcomeId = 3)
+
+
+
