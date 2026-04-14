@@ -78,44 +78,44 @@ CohortDiagnostics::launchDiagnosticsExplorer(sqliteDbPath = file.path(outputFold
 
 
 ####CohortMethods part
-options(sqlRenderTempEmulationSchema = NULL)
-homedir = "/Users/andreikiselev/Documents/Rdevelopment"
-outputFolder <- file.path(homedir, "StudyResults/DemoCohortDiagnosticsStudy_lungcancer_synthea10k_skeleton")
+#options(sqlRenderTempEmulationSchema = NULL)
+#homedir = "/Users/andreikiselev/Documents/Rdevelopment"
+#outputFolder <- file.path(homedir, "StudyResults/DemoCohortDiagnosticsStudy_lungcancer_synthea10k_skeleton")
 
 
-execute_cohort_method(connectionDetails,
-                      cdmDatabaseSchema,
-                      cohortDatabaseSchema = cohortDatabaseSchema,
-                      cohortTable = "cohort",
-                      cohortInclusionTable = paste0(cohortTable, "_inclusion"),
-                      cohortInclusionResultTable = paste0(cohortTable, "_inclusion_result"),
-                      cohortInclusionStatsTable = paste0(cohortTable, "_inclusion_stats"),
-                      cohortSummaryStatsTable = paste0(cohortTable, "_summary_stats"),
-                      cohortCensorStatsTable = paste0(cohortTable, "_censor_stats"),
-                      oracleTempSchema = NULL,
-                      tempEmulationSchema = getOption("sqlRenderTempEmulationSchema"),
-                      verifyDependencies = FALSE,
-                      outputFolder,
-                      databaseId = "Unknown",
-                      databaseName = "Unknown",
-                      databaseDescription = "Unknown",
-                      createCohorts = FALSE,
-                      synthesizePositiveControls = FALSE,
-                      runAnalyses = TRUE,
-                      packageResults = TRUE,
-                      maxCores = 4,
-                      minCellCount = 5)
+#execute_cohort_method(connectionDetails,
+#                      cdmDatabaseSchema,
+#                      cohortDatabaseSchema = cohortDatabaseSchema,
+#                      cohortTable = "cohort",
+#                      cohortInclusionTable = paste0(cohortTable, "_inclusion"),
+#                      cohortInclusionResultTable = paste0(cohortTable, "_inclusion_result"),
+#                      cohortInclusionStatsTable = paste0(cohortTable, "_inclusion_stats"),
+#                      cohortSummaryStatsTable = paste0(cohortTable, "_summary_stats"),
+#                      cohortCensorStatsTable = paste0(cohortTable, "_censor_stats"),
+#                      oracleTempSchema = NULL,
+#                      tempEmulationSchema = getOption("sqlRenderTempEmulationSchema"),
+#                      verifyDependencies = FALSE,
+#                      outputFolder,
+#                      databaseId = "Unknown",
+#                      databaseName = "Unknown",
+#                      databaseDescription = "Unknown",
+#                      createCohorts = FALSE,
+#                      synthesizePositiveControls = FALSE,
+#                      runAnalyses = TRUE,
+#                      packageResults = TRUE,
+#                      maxCores = 4,
+#                      minCellCount = 5)
 
-resultsZipFile <- file.path(outputFolder, "export", paste0("Results_", databaseId, ".zip"))
-dataFolder <- file.path(outputFolder, "shinyData")
+#resultsZipFile <- file.path(outputFolder, "export", paste0("Results_", databaseId, ".zip"))
+#dataFolder <- file.path(outputFolder, "shinyData")
 
 # You can inspect the results if you want:
-prepareForEvidenceExplorer(resultsZipFile = resultsZipFile, dataFolder = dataFolder)
-launchEvidenceExplorer(dataFolder = dataFolder, blind = TRUE, launch.browser = FALSE)
+#prepareForEvidenceExplorer(resultsZipFile = resultsZipFile, dataFolder = dataFolder)
+#launchEvidenceExplorer(dataFolder = dataFolder, blind = TRUE, launch.browser = FALSE)
 
 # Upload the results to the OHDSI SFTP server:
-privateKeyFileName <- ""
-userName <- ""
-uploadResults(outputFolder, privateKeyFileName, userName)
+#privateKeyFileName <- ""
+#userName <- ""
+#uploadResults(outputFolder, privateKeyFileName, userName)
 
 
