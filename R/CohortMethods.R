@@ -241,7 +241,7 @@ exctract_concepts <- function(outputFolder,
 negative_cohort_generate <- function(connectionDetails,
                                      cohortDatabaseSchema,
                                      cohortTable){
-  negativeControlIds <- read.csv("inst/negativeControlOutcomes.csv")$outcome_concept_id
+  negativeControlIds <- read.csv("inst/settings/negativeControlOutcomes.csv")$outcome_concept_id
   negativeControlCohorts <- tibble(
     cohortId = negativeControlIds,
     cohortName = sprintf("Negative control %d", negativeControlIds),

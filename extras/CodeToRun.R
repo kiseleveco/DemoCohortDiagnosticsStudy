@@ -65,6 +65,7 @@ DemoCohortDiagnosticsStudy::execute(
 
 
 # if you want to view the shiny app locally, uncomment the following section
+
 CohortDiagnostics::createMergedResultsFile(
   dataFolder = outputFolder,
   sqliteDbPath = file.path(outputFolder,
@@ -75,29 +76,46 @@ CohortDiagnostics::launchDiagnosticsExplorer(sqliteDbPath = file.path(outputFold
 
 
 
-#######CohortMethod
-#If negatie control cohort is not generated before
-negative_cohort_generate(connectionDetails,
-                         cohortDatabaseSchema,
-                         cohortTable)
-
-
-
 
 ####CohortMethods part
-results <- execute_CohortMethods(connectionDetails = connectionDetails,
-                      cdmDatabaseSchema = cdmDatabaseSchema,
+options(sqlRenderTempEmulationSchema = NULL)
+homedir = "/Users/andreikiselev/Documents/Rdevelopment"
+outputFolder <- file.path(homedir, "StudyResults/DemoCohortDiagnosticsStudy_lungcancer_synthea10k_skeleton")
+
+
+execute_cohort_method(connectionDetails,
+                      cdmDatabaseSchema,
                       cohortDatabaseSchema = cohortDatabaseSchema,
                       cohortTable = "cohort",
-                      outputFolder = outputFolder,
-                      incrementalFolder = file.path(outputFolder, "incrementalFolder"),
-                      minCellCount = 5,
-                      databaseName = databaseId,
-                      databaseDescription = databaseId,
-                      extraLog = NULL,
-                      targetId = 1,
-                      comparatorId = 2,
-                      outcomeId = 3)
+                      cohortInclusionTable = paste0(cohortTable, "_inclusion"),
+                      cohortInclusionResultTable = paste0(cohortTable, "_inclusion_result"),
+                      cohortInclusionStatsTable = paste0(cohortTable, "_inclusion_stats"),
+                      cohortSummaryStatsTable = paste0(cohortTable, "_summary_stats"),
+                      cohortCensorStatsTable = paste0(cohortTable, "_censor_stats"),
+                      oracleTempSchema = NULL,
+                      tempEmulationSchema = getOption("sqlRenderTempEmulationSchema"),
+                      verifyDependencies = FALSE,
+                      outputFolder,
+                      databaseId = "Unknown",
+                      databaseName = "Unknown",
+                      databaseDescription = "Unknown",
+                      createCohorts = FALSE,
+                      synthesizePositiveControls = FALSE,
+                      runAnalyses = TRUE,
+                      packageResults = TRUE,
+                      maxCores = 4,
+                      minCellCount = 5)
 
+resultsZipFile <- file.path(outputFolder, "export", paste0("Results_", databaseId, ".zip"))
+dataFolder <- file.path(outputFolder, "shinyData")
+
+# You can inspect the results if you want:
+prepareForEvidenceExplorer(resultsZipFile = resultsZipFile, dataFolder = dataFolder)
+launchEvidenceExplorer(dataFolder = dataFolder, blind = TRUE, launch.browser = FALSE)
+
+# Upload the results to the OHDSI SFTP server:
+privateKeyFileName <- ""
+userName <- ""
+uploadResults(outputFolder, privateKeyFileName, userName)
 
 

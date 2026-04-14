@@ -1,4 +1,4 @@
-atlas_id,cohort_id,cohort_name,logic_description,generate_stats
-246,1,Amlodipine,NA,TRUE
-247,2,Lisinopril,NA,TRUE
-248,3,MACE (major cardiac events),NA,TRUE
+﻿atlasId,cohort_name,cohortId,name
+246,Amlodipine,1,Amlodipine
+247,Lisinopril,2,Lisinopril
+248,MACE (major cardiac events),3,MACE (major cardiac events)

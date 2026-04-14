@@ -2,17 +2,95 @@ DBMS:
 postgresql
 
 Error:
-org.postgresql.util.PSQLException: An I/O error occurred while sending to the backend.
+org.postgresql.util.PSQLException: ERROR: relation "lungcancer_synth10k.cohort_method" does not exist
+  Position: 163
 
 SQL:
-INSERT INTO charlson_concepts (
-	diag_category_id,
-	concept_id
-	)
-SELECT 8,
-	descendant_concept_id
-FROM lungcancer_synth10k.concept_ancestor
-WHERE ancestor_concept_id IN (4247120)
+CREATE TEMP TABLE cohort_person
+AS
+WITH raw_cohorts  AS (
+	SELECT exposure_table.subject_id,
+		cohort_definition_id,
+		cohort_start_date,
+		cohort_end_date
+	FROM lungcancer_synth10k.cohort_method exposure_table
+  WHERE cohort_definition_id IN (1, 2)
+)
+-- remove_duplicate_subjects: remove all
+, remove_duplicate_subjects AS (
+  SELECT raw_cohorts.subject_id,
+	  cohort_definition_id,
+		cohort_start_date,
+		cohort_end_date
+	FROM raw_cohorts
+	INNER JOIN (
+    SELECT subject_id,
+      COUNT(DISTINCT(cohort_definition_id)) exposure_count
+    FROM raw_cohorts
+    GROUP BY subject_id
+	) tmp
+	ON
+		raw_cohorts.subject_id = tmp.subject_id
+	WHERE
+		tmp.exposure_count = 1
+)
+-- first_only
+, first_only AS (
+  SELECT subject_id,
+	  cohort_definition_id,
+		cohort_start_date,
+		cohort_end_date
+	FROM (
+		SELECT subject_id,
+		  cohort_definition_id,
+		  cohort_start_date,
+		  cohort_end_date,
+		  ROW_NUMBER() OVER (PARTITION BY subject_id, cohort_definition_id ORDER BY cohort_start_date) AS cohort_number
+		FROM remove_duplicate_subjects
+	) tmp
+  WHERE cohort_number = 1
+)
+-- joined_with_obs_period
+, joined_with_obs_period AS (
+SELECT subject_id,
+	  cohort_definition_id,
+		cohort_start_date,
+		cohort_end_date,
+		observation_period_start_date,
+		observation_period_end_date
+	FROM first_only
+  INNER JOIN lungcancer_synth10k.observation_period
+	  ON subject_id = person_id
+	 WHERE cohort_start_date <= observation_period_end_date
+	    AND cohort_start_date >= observation_period_start_date
+)
+-- washout_period
+, washout_period AS (
+SELECT subject_id,
+	  cohort_definition_id,
+		cohort_start_date,
+		cohort_end_date,
+		observation_period_start_date,
+		observation_period_end_date
+	FROM joined_with_obs_period
+	WHERE (CAST(cohort_start_date AS DATE) - CAST(observation_period_start_date AS DATE)) >= 183
+)
+-- Generating a unique row_id that can be used instead of the compound key
+-- (subjectId, cohort_definition_id, cohort_start_date) for easier joining etc.
+ SELECT
+ROW_NUMBER() OVER (ORDER BY subject_id, cohort_start_date) AS row_id,
+  subject_id,
+	cohort_definition_id,
+	cohort_start_date,
+	(CAST(cohort_start_date AS DATE) - CAST(observation_period_start_date AS DATE)) AS days_from_obs_start,
+		(CAST(cohort_end_date AS DATE) - CAST(cohort_start_date AS DATE))
+	 AS days_to_cohort_end,
+		(CAST(observation_period_end_date AS DATE) - CAST(cohort_start_date AS DATE))
+	 AS days_to_obs_end,
+	cohort_end_date
+FROM
+washout_period
+
 
 R version:
 R version 4.4.1 (2024-06-14)
@@ -30,4 +108,12 @@ Attached base packages:
 - base
 
 Other attached packages:
+- ResultModelManager (0.6.2)
+- R6 (2.6.1)
+- CohortMethod (6.0.1)
+- FeatureExtraction (3.13.0)
+- Andromeda (1.2.0)
+- Cyclops (3.7.0)
+- DatabaseConnector (7.1.0)
+- dplyr (1.2.0)
 - DemoCohortDiagnosticsStudy (0.1.0)

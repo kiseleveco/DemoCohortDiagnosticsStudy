@@ -16,3 +16,11 @@ covariateId	correlation	covariateName	analysisId	conceptId	valueAsConceptId	coll
 21601784410	-1	drug_era group (DrugGroupEraLongTerm) during day -365 through 0 days relative to index: ACE inhibitors, plain	410	21601784	NA	NA
 21601784412	-1	drug_era group (DrugGroupEraShortTerm) during day -30 through 0 days relative to index: ACE inhibitors, plain	412	21601784	NA	NA
 21601784413	-1	drug_era group (DrugGroupEraOverlapping) during day 0 through 0 days relative to index: ACE inhibitors, plain	413	21601784	NA	NA
+3004249704	0.500740046278257	measurement during day -30 through 0 days relative to index: Systolic blood pressure	704	3004249	NA	NA
+3012888704	0.500740046278257	measurement during day -30 through 0 days relative to index: Diastolic blood pressure	704	3012888	NA	NA
+3024171704	0.500124557844582	measurement during day -30 through 0 days relative to index: Respiratory rate	704	3024171	NA	NA
+3027018704	0.500124557844582	measurement during day -30 through 0 days relative to index: Heart rate	704	3027018	NA	NA
+3036277704	0.500124557844582	measurement during day -30 through 0 days relative to index: Body height	704	3036277	NA	NA
+3038553704	0.500124557844582	measurement during day -30 through 0 days relative to index: Body mass index (BMI) [Ratio]	704	3038553	NA	NA
+43054909804	0.500124557844582	observation during day -30 through 0 days relative to index: Tobacco smoking status	804	43054909	NA	NA
+46272459504	0.500124557844582	procedure_occurrence during day -30 through 0 days relative to index: Assessment of health and social care needs	504	46272459	NA	NA
